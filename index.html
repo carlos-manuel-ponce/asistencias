@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala adaptable</title>
+<style>
+  body {
+    margin: 0;
+    background: #f9fafb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .sala {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4vw; /* pasillo más amplio entre sectores */
+    width: 90vw; /* ocupa el 90% del ancho */
+    max-width: 900px; /* límite para pantallas grandes */
+  }
+
+  .sector {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1vw;
+    background: #e5e7eb;
+    padding: 1vw;
+    border-radius: 10px;
+    flex: 1 1 45%; /* cada sector ocupa 45% en pantallas grandes */
+    min-width: 300px; /* nunca más chico de 300px */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .asiento {
+    aspect-ratio: 1/1; /* mantiene forma cuadrada automáticamente */
+    background: #d1d5db;
+    border-radius: 10%;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .asiento:hover {
+    background: #60a5fa;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .sector {
+      flex: 1 1 45%; /* cada sector ocupa 45% del ancho */
+      min-width: 160px; /* mínimo para que quepan las 10 columnas */
+      grid-template-columns: repeat(10, 1fr); /* mantenemos las 10 columnas */
+      gap: 0.5vw; /* reducimos el gap entre asientos para que quepan */
+      padding: 0.5vw; /* reducimos el padding */
+    }
+    
+    .sala {
+      gap: 3vw; /* pasillo visible en móvil */
+      width: 98vw; /* usamos más ancho disponible */
+    }
+    
+    .asiento {
+      border-radius: 8%; /* reducimos ligeramente el border-radius */
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="sala">
+  <div class="sector" id="sector1"></div>
+  <div class="sector" id="sector2"></div>
+</div>
+
+<script>
+  function crearAsientos(sectorId) {
+    const sector = document.getElementById(sectorId);
+    for (let i = 1; i <= 130; i++) {
+      const asiento = document.createElement('div');
+      asiento.classList.add('asiento');
+      sector.appendChild(asiento);
+    }
+  }
+  crearAsientos('sector1');
+  crearAsientos('sector2');
+</script>
+
+</body>
+</html>
