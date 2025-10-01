@@ -9,7 +9,7 @@
 
   body {
     margin: 0;
-    background: #f9fafb;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -36,20 +36,20 @@
 
   /* Título independiente */
   .titulo-seccion {
-    background: #f9fafb;
+    background: #ffffff;
     padding: 20px 0;
     text-align: center;
   }
 
   .titulo-principal {
     font-size: 32px;
-    font-weight: 800;
-    color: #1f2937;
+    font-weight: 400;
+    color: #3B65A3;
     margin: 0;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0px;
+    text-transform: lowercase;
+    background: linear-gradient(135deg, #3B65A3 0%, #56B4C6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -64,10 +64,12 @@
 
   .subtitulo {
     font-size: 22px;
-    font-weight: 700;
-    color: #374151;
+    font-weight: 400;
+    color: #3B65A3;
     text-align: center;
     margin: 0 0 30px 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: lowercase;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -82,8 +84,8 @@
   }
 
   .estadistica-card {
-    background: linear-gradient(135deg, #6c5ce7, #5a4fcf);
-    border: 2px solid #5a4fcf;
+    background: linear-gradient(135deg, #3B65A3, #56B4C6);
+    border: 2px solid #3B65A3;
     border-radius: 16px;
     padding: 25px 20px;
     text-align: center;
@@ -130,8 +132,8 @@
 
   /* Colores intensos para cada tipo */
   .estadistica-card.presentes {
-    border-color: #00d084;
-    background: linear-gradient(135deg, #00d084, #00b370);
+    border-color: #56B4C6;
+    background: linear-gradient(135deg, #56B4C6, #3B65A3);
     color: white;
   }
 
@@ -144,8 +146,8 @@
   }
 
   .estadistica-card.ausentes {
-    border-color: #ff4757;
-    background: linear-gradient(135deg, #ff4757, #ff3838);
+    border-color: #3B65A3;
+    background: linear-gradient(135deg, #3B65A3, #56B4C6);
     color: white;
   }
 
@@ -158,8 +160,8 @@
   }
 
   .estadistica-card.ocupacion {
-    border-color: #0984e3;
-    background: linear-gradient(135deg, #0984e3, #0770d1);
+    border-color: #3B65A3;
+    background: linear-gradient(135deg, #3B65A3, #56B4C6);
     color: white;
   }
 
@@ -188,23 +190,25 @@
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 1vw;
-    background: #e5e7eb;
+    background: #ffffff;
     padding: 1vw;
     border-radius: 10px;
     flex: 1 1 45%; /* cada sector ocupa 45% en pantallas grandes */
     min-width: 300px; /* nunca más chico de 300px */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #56B4C6;
   }
 
   .asiento {
     aspect-ratio: 1/1; /* mantiene forma cuadrada automáticamente */
-    background: #d1d5db;
+    background: #56B4C6;
     border-radius: 10%;
     transition: transform 0.2s, background 0.2s;
+    border: 1px solid #3B65A3;
   }
 
   .asiento:hover {
-    background: #60a5fa;
+    background: #3B65A3;
     transform: scale(1.1);
   }
 
@@ -223,7 +227,9 @@
     
     .titulo-principal {
       font-size: 24px;
-      letter-spacing: -0.3px;
+      letter-spacing: 0px;
+      font-weight: 400;
+      text-transform: lowercase;
     }
     
     .estadisticas-seccion {
@@ -233,7 +239,9 @@
     .subtitulo {
       font-size: 18px;
       margin-bottom: 20px;
-      letter-spacing: 1.5px;
+      letter-spacing: 0px;
+      font-weight: 400;
+      text-transform: lowercase;
     }
     
     .estadisticas-grid {
@@ -282,14 +290,25 @@
   <img src="LOGO NUEVO COLOR_122003.png" alt="Logo" class="header-logo">
 </header>
 
-<!-- Título independiente -->
+<!-- Texto descriptivo -->
+<div style="text-align: center; padding: 15px 0; background: #ffffff; font-family: 'Inter', sans-serif; color: #6b7280; font-size: 16px;">
+  Gestiona y Consulta tus asistencias en tiempo real.
+</div>
+
+<!-- Título del plano -->
 <div class="titulo-seccion">
-  <h1 class="titulo-principal">Gestión de Asistencias</h1>
+  <h2 class="subtitulo">salon islas malvinas - san luis</h2>
+</div>
+
+<!-- Plano de sectores -->
+<div class="sala">
+  <div class="sector" id="sector1"></div>
+  <div class="sector" id="sector2"></div>
 </div>
 
 <!-- Estadísticas -->
 <div class="estadisticas-seccion">
-  <h2 class="subtitulo">Estadísticas</h2>
+  <h2 class="subtitulo">estadísticas</h2>
   <div class="estadisticas-grid">
     <div class="estadistica-card">
       <div class="estadistica-valor" id="total">260</div>
@@ -308,11 +327,6 @@
       <div class="estadistica-label">Ocupación</div>
     </div>
   </div>
-</div>
-
-<div class="sala">
-  <div class="sector" id="sector1"></div>
-  <div class="sector" id="sector2"></div>
 </div>
 
 <script>
