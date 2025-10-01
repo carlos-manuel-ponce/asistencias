@@ -5,22 +5,183 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sala adaptable</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
   body {
     margin: 0;
     background: #f9fafb;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Encabezado solo con logo */
+  .header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Título independiente */
+  .titulo-seccion {
+    background: #f9fafb;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .titulo-principal {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1f2937;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Sección de estadísticas */
+  .estadisticas-seccion {
+    background: #ffffff;
+    padding: 25px 20px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .subtitulo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #374151;
+    text-align: center;
+    margin: 0 0 30px 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .estadisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .estadistica-card {
+    background: linear-gradient(135deg, #6c5ce7, #5a4fcf);
+    border: 2px solid #5a4fcf;
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: white;
+    position: relative;
+    backdrop-filter: blur(10px);
+  }
+
+  .estadistica-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  }
+
+  .estadistica-card.presentes:hover {
+    box-shadow: 0 8px 25px rgba(0,208,132,0.4);
+  }
+
+  .estadistica-card.ausentes:hover {
+    box-shadow: 0 8px 25px rgba(255,71,87,0.4);
+  }
+
+  .estadistica-card.ocupacion:hover {
+    box-shadow: 0 8px 25px rgba(9,132,227,0.4);
+  }
+
+  .estadistica-valor {
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+  }
+
+  .estadistica-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #e0e0ff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Colores intensos para cada tipo */
+  .estadistica-card.presentes {
+    border-color: #00d084;
+    background: linear-gradient(135deg, #00d084, #00b370);
+    color: white;
+  }
+
+  .estadistica-card.presentes .estadistica-valor {
+    color: white;
+  }
+
+  .estadistica-card.presentes .estadistica-label {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .estadistica-card.ausentes {
+    border-color: #ff4757;
+    background: linear-gradient(135deg, #ff4757, #ff3838);
+    color: white;
+  }
+
+  .estadistica-card.ausentes .estadistica-valor {
+    color: white;
+  }
+
+  .estadistica-card.ausentes .estadistica-label {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .estadistica-card.ocupacion {
+    border-color: #0984e3;
+    background: linear-gradient(135deg, #0984e3, #0770d1);
+    color: white;
+  }
+
+  .estadistica-card.ocupacion .estadistica-valor {
+    color: white;
+  }
+
+  .estadistica-card.ocupacion .estadistica-label {
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .sala {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 4vw; /* pasillo más amplio entre sectores */
     width: 90vw; /* ocupa el 90% del ancho */
     max-width: 900px; /* límite para pantallas grandes */
+    margin: 0 auto;
+    flex: 1;
+    padding: 20px 0;
   }
 
   .sector {
@@ -48,6 +209,52 @@
   }
 
   @media (max-width: 600px) {
+    .header {
+      padding: 8px 0;
+    }
+    
+    .header-logo {
+      height: 40px;
+    }
+    
+    .titulo-seccion {
+      padding: 15px 0;
+    }
+    
+    .titulo-principal {
+      font-size: 24px;
+      letter-spacing: -0.3px;
+    }
+    
+    .estadisticas-seccion {
+      padding: 20px 15px;
+    }
+    
+    .subtitulo {
+      font-size: 18px;
+      margin-bottom: 20px;
+      letter-spacing: 1.5px;
+    }
+    
+    .estadisticas-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .estadistica-card {
+      padding: 15px;
+    }
+    
+    .estadistica-valor {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    
+    .estadistica-label {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    
     .sector {
       flex: 1 1 45%; /* cada sector ocupa 45% del ancho */
       min-width: 160px; /* mínimo para que quepan las 10 columnas */
@@ -59,6 +266,7 @@
     .sala {
       gap: 3vw; /* pasillo visible en móvil */
       width: 98vw; /* usamos más ancho disponible */
+      padding: 10px 0;
     }
     
     .asiento {
@@ -68,6 +276,39 @@
 </style>
 </head>
 <body>
+
+<!-- Encabezado solo con logo -->
+<header class="header">
+  <img src="LOGO NUEVO COLOR_122003.png" alt="Logo" class="header-logo">
+</header>
+
+<!-- Título independiente -->
+<div class="titulo-seccion">
+  <h1 class="titulo-principal">Gestión de Asistencias</h1>
+</div>
+
+<!-- Estadísticas -->
+<div class="estadisticas-seccion">
+  <h2 class="subtitulo">Estadísticas</h2>
+  <div class="estadisticas-grid">
+    <div class="estadistica-card">
+      <div class="estadistica-valor" id="total">260</div>
+      <div class="estadistica-label">Total</div>
+    </div>
+    <div class="estadistica-card presentes">
+      <div class="estadistica-valor" id="presentes">185</div>
+      <div class="estadistica-label">Presentes</div>
+    </div>
+    <div class="estadistica-card ausentes">
+      <div class="estadistica-valor" id="ausentes">75</div>
+      <div class="estadistica-label">Ausentes</div>
+    </div>
+    <div class="estadistica-card ocupacion">
+      <div class="estadistica-valor" id="ocupacion">71%</div>
+      <div class="estadistica-label">Ocupación</div>
+    </div>
+  </div>
+</div>
 
 <div class="sala">
   <div class="sector" id="sector1"></div>
@@ -83,8 +324,31 @@
       sector.appendChild(asiento);
     }
   }
+  
+  // Crear asientos
   crearAsientos('sector1');
   crearAsientos('sector2');
+  
+  // Función para actualizar estadísticas
+  function actualizarEstadisticas() {
+    const total = 260; // Total de asientos
+    
+    // Simular algunos presentes y ausentes (puedes cambiar esta lógica)
+    const presentes = Math.floor(Math.random() * 50) + 180; // Entre 180-230
+    const ausentes = total - presentes;
+    const ocupacion = Math.round((presentes / total) * 100);
+    
+    document.getElementById('total').textContent = total;
+    document.getElementById('presentes').textContent = presentes;
+    document.getElementById('ausentes').textContent = ausentes;
+    document.getElementById('ocupacion').textContent = ocupacion + '%';
+  }
+  
+  // Actualizar estadísticas al cargar
+  actualizarEstadisticas();
+  
+  // Actualizar estadísticas cada 5 segundos (opcional, para demostración)
+  setInterval(actualizarEstadisticas, 5000);
 </script>
 
 </body>
